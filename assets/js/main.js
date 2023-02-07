@@ -27,11 +27,11 @@ const loaderFunc = () => {
     adviceTitle.classList.add('animate-flicker');
     icon.style.pointerEvents = 'none';
     if (
-      adviceTitle.classList.contains('fade-out') &&
-      adviceTitle.classList.contains('fade-out')
+      adviceTitle.classList.contains('fade-in') &&
+      adviceTitle.classList.contains('fade-in')
     ) {
-      adviceTitle.classList.remove('fade-out');
-      adviceText.classList.remove('fade-out');
+      adviceTitle.classList.remove('fade-in');
+      adviceText.classList.remove('fade-in');
     }
   } else {
     adviceText.classList.remove('skeleton-box');
@@ -39,8 +39,8 @@ const loaderFunc = () => {
     adviceText.classList.remove('animate-flicker');
     adviceTitle.classList.remove('animate-flicker');
     icon.removeAttribute('style');
-    adviceText.classList.add('fade-out');
-    adviceTitle.classList.add('fade-out');
+    adviceText.classList.add('fade-in');
+    adviceTitle.classList.add('fade-in');
   }
 };
 
