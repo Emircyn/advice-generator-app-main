@@ -161,18 +161,6 @@ body {
     opacity: 0;
   }
 }
-.fade-out {
-  animation: fadeInAnimation ease 2s;
-}
-
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .skeleton-box {
   margin: 8px;
   border-radius: 4px;
@@ -214,11 +202,4 @@ body {
   100% {
     transform: translateX(100%);
   }
-}
-
-p {
-  width: 100%;
-}
-p span.skeleton-box {
-  width: 100%;
 }

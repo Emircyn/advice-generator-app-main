@@ -26,7 +26,6 @@ const loaderFunc = () => {
     adviceText.classList.add('animate-flicker');
     adviceTitle.classList.add('animate-flicker');
     icon.style.pointerEvents = 'none';
-    icon.style.cursor = 'danger';
     if (
       adviceTitle.classList.contains('fade-out') &&
       adviceTitle.classList.contains('fade-out')
@@ -48,10 +47,8 @@ const loaderFunc = () => {
 const textChange = async (randomPick) => {
   const comments = await fetchComments(commentsApi);
   adviceTitle.innerHTML = `advice #${comments[randomPick].id}`;
-  ////text
   adviceText.innerHTML = `"${comments[randomPick].body}"`;
   isLoader = false;
-  console.log('textChange last' + isLoader);
 };
 
 icon.addEventListener('click', () => {
