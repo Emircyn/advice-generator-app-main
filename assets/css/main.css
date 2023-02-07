@@ -149,16 +149,16 @@ body {
   -o-animation: flickerAnimation 2s infinite;
   animation: flickerAnimation 2s infinite;
 }
-.fade-out {
-  animation: fadeOutAnimation ease 3s;
+.fade-in {
+  animation: fadeInAnimation ease 3s;
 }
 
-@keyframes fadeOutAnimation {
+@keyframes fadeInAnimation {
   0% {
-    opacity: 1;
+    opacity: 0;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 .skeleton-box {
