@@ -150,7 +150,7 @@ body {
   animation: flickerAnimation 2s infinite;
 }
 .fade-out {
-  animation: fadeoutAnimation ease 3s;
+  animation: fadeOutAnimation ease 3s;
 }
 
 @keyframes fadeOutAnimation {
