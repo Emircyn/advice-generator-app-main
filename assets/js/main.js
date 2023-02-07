@@ -26,8 +26,6 @@ const loaderFunc = () => {
     adviceText.classList.add('animate-flicker');
     adviceTitle.classList.add('animate-flicker');
     icon.style.pointerEvents = 'none';
-    icon.style.cursor="not-allowed";
-
     if (
       adviceTitle.classList.contains('fade-in') &&
       adviceTitle.classList.contains('fade-in')
