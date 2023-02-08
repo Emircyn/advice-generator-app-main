@@ -1,15 +1,14 @@
 let commentsApi;
-const randomPick = Math.floor(Math.random() * 100);
 const adviceTitle = document.querySelector('.advice-title');
 const adviceText = document.querySelector('.advice-text');
 const advice = document.querySelector('.advice');
 const icon = document.querySelector('.icon');
+
 let isLoader = false;
 const fetchComments = async (funcComments) => {
   isLoader = true;
   loaderFunc(isLoader);
-  console.log('fetch first' + isLoader);
-  await fetch('https://jsonplaceholder.typicode.com/comments')
+  await fetch('https://api.adviceslip.com/advice')
     .then((response) => response.json())
     .then((json) => (funcComments = json))
     .finally(() => {
@@ -21,37 +20,68 @@ const fetchComments = async (funcComments) => {
 
 const loaderFunc = () => {
   if (isLoader) {
-    adviceText.classList.add('skeleton-box');
-    adviceTitle.classList.add('skeleton-box');
-    adviceText.classList.add('animate-flicker');
-    adviceTitle.classList.add('animate-flicker');
-    icon.style.pointerEvents = 'none';
-    if (
-      adviceTitle.classList.contains('fade-out') &&
-      adviceTitle.classList.contains('fade-out')
-    ) {
-      adviceTitle.classList.remove('fade-out');
-      adviceText.classList.remove('fade-out');
-    }
-  } else {
-    adviceText.classList.remove('skeleton-box');
-    adviceTitle.classList.remove('skeleton-box');
-    adviceText.classList.remove('animate-flicker');
-    adviceTitle.classList.remove('animate-flicker');
-    icon.removeAttribute('style');
+    adviceText.removeAttribute('id');
+    adviceText.classList.remove('fade-in');
+    adviceTitle.classList.remove('fade-in');
+    icon.classList.add('animate-flicker');
     adviceText.classList.add('fade-out');
     adviceTitle.classList.add('fade-out');
+    createSkeleton(adviceText);
+    createSkeleton(adviceTitle);
+    icon.style.pointerEvents = 'none';
+  } else {
+    adviceText.setAttribute('id', 'text');
+    adviceText.classList.remove('fade-out');
+    adviceTitle.classList.remove('fade-out');
+    adviceText.classList.add('fade-in');
+    adviceTitle.classList.add('fade-in');
+  }
+};
+const createSkeleton = (e) => {
+  e.innerHTML = '';
+  e.style.width = `100%`;
+
+  if (e.classList.contains('advice-title')) {
+    const skeletonElement = document.createElement('span');
+    skeletonElement.classList.add('skeleton-box');
+    skeletonElement.classList.add('animate-flicker');
+    skeletonElement.style.width = `${50}%`;
+    e.appendChild(skeletonElement);
+  } else {
+    for (let i = 1; i < 4; i++) {
+      const skeletonElement = document.createElement('span');
+      skeletonElement.classList.add('skeleton-box');
+      skeletonElement.classList.add('animate-flicker');
+      skeletonElement.style.width = `${100 - i * 10}%`;
+      e.appendChild(skeletonElement);
+    }
   }
 };
 
-const textChange = async (randomPick) => {
+const textChange = async () => {
   const comments = await fetchComments(commentsApi);
-  adviceTitle.innerHTML = `advice #${comments[randomPick].id}`;
-  adviceText.innerHTML = `"${comments[randomPick].body}"`;
+  adviceTitle.innerHTML = `advice #${comments.slip.id}`;
+  adviceText.innerHTML = `"${comments.slip.advice}"`;
   isLoader = false;
+  setTimeout(() => {
+    icon.removeAttribute('style');
+    icon.classList.remove('animate-flicker');
+  }, 5000);
+  console.log(comments);
 };
 
 icon.addEventListener('click', () => {
-  let randomTwoPick = Math.floor(Math.random() * 100);
-  textChange(randomTwoPick);
+  textChange();
+});
+
+adviceText.addEventListener('click', async () => {
+  if (adviceText.id) {
+    try {
+      await navigator.clipboard.writeText(adviceText.textContent);
+
+      alert('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
 });
