@@ -163,9 +163,9 @@ body {
   animation: fadeOutAnimation ease 0.5s;
 }
 
-@keyframes fadeOutAnimation {
+@keyframes fadeInAnimation {
   0% {
-    opacity: 1;
+    opacity: 0;
   }
   100% {
     opacity: 0.5;
